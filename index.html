@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,26 +19,28 @@
             <li><a href="#" onclick="switchView('crates', this); return false;" id="nav-crates">Crate Keys</a></li>
         </ul>
     </nav>
-
-    <!-- Main Container -->
-    <main class="container">
+    <!-- Main Container for Hero -->
+    <header class="hero-wrapper" style="position: relative;">
+        <!-- Particles will be injected here -->
+        <div id="particles-container" class="particles-container"></div>
         
-        <!-- Hero Section -->
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <img src="ms_logo.png" alt="MineStreak Logo" class="hero-logo-img">
+        <div class="container">
         <section class="hero">
             <!-- Left: Copy IP -->
             <div class="hero-side ip-side" onclick="copyIP()">
-                <div class="icon-circle">
+                <div class="hero-stat-icon" style="background: rgba(33, 150, 243, 0.1); color: var(--color-secondary);">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                 </div>
                 <div class="hero-text">
-                    <div class="hero-title" id="ip-text">PLAY.MineStreak.FUN</div>
+                    <div class="hero-title" id="ip-text">play.minestreak.fun</div>
                     <div class="hero-subtitle">Click to Copy IP</div>
                 </div>
             </div>
-
             <!-- Right: Discord -->
             <a href="https://discord.gg/jcXgZEC8Qb" target="_blank" class="hero-side discord-banner-block" style="text-decoration: none;">
-                <div class="discord-bubble">
+                <div class="hero-stat-icon" style="background: rgba(33, 150, 243, 0.1); color: var(--color-secondary);">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                 </div>
                 <div class="discord-hero-text">
@@ -51,11 +52,10 @@
                 </div>
             </a>
         </section>
-
         <!-- Welcome Banner -->
         <section class="welcome-banner">
             <div class="banner-left">
-                <img src="https://placehold.co/64x64/2a2a2a/7b2cbf?text=MF" alt="Logo Icon" class="banner-icon">
+                <img src="ms-logo.png" alt="MineStreak Logo" class="banner-icon">
                 <div>
                     <h2 class="banner-title">MineStreak</h2>
                     <p class="banner-subtitle">Welcome to our store!</p>
@@ -64,24 +64,28 @@
             
             <div class="banner-right">
                 <!-- Slanted Basket Block -->
-                <div class="slanted-block block-primary">
+                <div class="slanted-block block-primary basket-hover" id="basket-block" onclick="openCartModal()" style="cursor: pointer;">
                     <div class="block-content">
-                        <span class="block-small">Check your new</span>
-                        <span class="block-large">BASKET</span>
+                        <span class="block-small" id="basket-count">0 Items</span>
+                        <span class="block-large" id="basket-total">BASKET</span>
                     </div>
                 </div>
                 
                 <!-- Slanted Login Block -->
-                <div class="slanted-block block-secondary">
-                    <div class="block-content">
-                        <span class="block-small">Click to login</span>
-                        <span class="block-large">NONE</span>
+                <div class="slanted-block block-secondary login-hover" id="login-block" onclick="openLoginModal()" style="cursor: pointer;">
+                    <div class="block-content" style="display: flex; flex-direction: row; gap: 15px; align-items: center;">
+                        <img id="login-avatar" src="https://mc-heads.net/avatar/Steve/40" style="display: none; border-radius: 8px;" alt="Avatar">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span class="block-small" id="login-subtitle">Click to login</span>
+                            <span class="block-large" id="login-title">NONE</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Store Layout (Main Content + Sidebar) -->
+        </div>
+    </div> <!-- End hero-wrapper -->
+    </header>
+    <!-- Store Layout (Main Content + Sidebar) -->
+    <main class="container">
         <div class="store-layout">
             
             <div class="store-main">
@@ -101,10 +105,9 @@
                                 <span class="category-subtitle">Click to view</span>
                             </div>
                             <div class="category-image">
-                                <img src="https://mc-heads.net/avatar/Notch/80" alt="Ranks">
+                                <img src="https://mc-heads.net/body/Ninja/100" alt="Avatar">
                             </div>
                         </a>
-
                         <!-- Category: Crates -->
                         <a href="#" onclick="switchView('crates'); return false;" class="category-card">
                             <div class="category-text">
@@ -112,10 +115,9 @@
                                 <span class="category-subtitle">Click to view</span>
                             </div>
                             <div class="category-image">
-                                <img src="https://mc-heads.net/avatar/MHF_Chest/80" alt="Crates">
+                                <img src="https://mc-heads.net/body/MHF_Chest/100" alt="Crates">
                             </div>
                         </a>
-
                         <!-- Category: Bundles -->
                         <a href="#" onclick="switchView('bundles'); return false;" class="category-card">
                             <div class="category-text">
@@ -123,10 +125,9 @@
                                 <span class="category-subtitle">Click to view</span>
                             </div>
                             <div class="category-image">
-                                <img src="https://mc-heads.net/avatar/MHF_Present1/80" alt="Bundles">
+                                <img src="https://mc-heads.net/body/MHF_Present1/100" alt="Bundles">
                             </div>
                         </a>
-
                         <!-- Category: Cosmetics -->
                         <a href="#" onclick="switchView('cosmetics'); return false;" class="category-card">
                             <div class="category-text">
@@ -134,184 +135,172 @@
                                 <span class="category-subtitle">Click to view</span>
                             </div>
                             <div class="category-image">
-                                <img src="https://mc-heads.net/avatar/MHF_Slime/80" alt="Cosmetics">
+                                <img src="https://mc-heads.net/body/MHF_Slime/100" alt="Cosmetics">
                             </div>
                         </a>
-
                     </div>
                 </div>
-
                 <!-- STORE VIEW: RANKS -->
                 <div id="view-ranks" class="store-view" style="display: none;">
                     <div class="view-header">
-                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <button class="back-btn" onclick="switchView('home')">â† Back to Categories</button>
                         <h3>Server Ranks</h3>
                         <p class="view-subtitle">Unlock exclusive server-wide privileges, kits, prefixes, and quality-of-life commands!</p>
                     </div>
                     <div class="products-grid">
                         <div class="product-card">
                             <div class="product-badge">POPULAR</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/Notch/64" alt="VIP"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/Ninja/64" alt="VIP"></div>
                             <h4 class="product-title">VIP RANK</h4>
-                            <div class="product-price">₹199 <span class="old-price">₹299</span></div>
+                            <div class="product-price">â‚¹199 <span class="old-price">â‚¹299</span></div>
                             <ul class="product-features">
-                                <li>✨ [VIP] Chat Prefix & Name tag</li>
-                                <li>✨ Access to /kit vip (24h cooldown)</li>
-                                <li>✨ 2x Coin multiplier & vote rewards</li>
-                                <li>✨ Priority queue when server is full</li>
+                                <li>âœ¨ [VIP] Chat Prefix & Name tag</li>
+                                <li>âœ¨ Access to /kit vip (24h cooldown)</li>
+                                <li>âœ¨ 2x Coin multiplier & vote rewards</li>
+                                <li>âœ¨ Priority queue when server is full</li>
                             </ul>
-                            <button class="buy-btn" onclick="openCheckout('VIP RANK', '₹199')">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('VIP RANK', 199)">BUY NOW</button>
                         </div>
-
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">BEST VALUE</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Alex/64" alt="MVP"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/Assassin/64" alt="MVP"></div>
                             <h4 class="product-title">MVP RANK</h4>
-                            <div class="product-price">₹499 <span class="old-price">₹799</span></div>
+                            <div class="product-price">â‚¹499 <span class="old-price">â‚¹799</span></div>
                             <ul class="product-features">
-                                <li>🔥 [MVP] Gold Prefix & Chat color</li>
-                                <li>🔥 Access to /kit mvp & /fly in lobby</li>
-                                <li>🔥 3x Coin multiplier & vote rewards</li>
-                                <li>🔥 Create up to 5 custom homes (/sethome)</li>
+                                <li>ðŸ”¥ [MVP] Gold Prefix & Chat color</li>
+                                <li>ðŸ”¥ Access to /kit mvp & /fly in lobby</li>
+                                <li>ðŸ”¥ 3x Coin multiplier & vote rewards</li>
+                                <li>ðŸ”¥ Create up to 5 custom homes (/sethome)</li>
                             </ul>
-                            <button class="buy-btn accent-btn" onclick="openCheckout('MVP RANK', '₹499')">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('MVP RANK', 499)">BUY NOW</button>
                         </div>
-
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">LEGENDARY</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Enderman/64" alt="STREAK"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Enderman/64" alt="STREAK"></div>
                             <h4 class="product-title">STREAK GOD</h4>
-                            <div class="product-price">₹999 <span class="old-price">₹1499</span></div>
+                            <div class="product-price">â‚¹999 <span class="old-price">â‚¹1499</span></div>
                             <ul class="product-features">
-                                <li>👑 [STREAK GOD] Animated Chat Prefix</li>
-                                <li>👑 ALL perks from VIP & MVP included</li>
-                                <li>👑 Exclusive custom particle halos & effects</li>
-                                <li>👑 Unlimited homes & /nick custom formatting</li>
+                                <li>ðŸ‘‘ [STREAK GOD] Animated Chat Prefix</li>
+                                <li>ðŸ‘‘ ALL perks from VIP & MVP included</li>
+                                <li>ðŸ‘‘ Exclusive custom particle halos & effects</li>
+                                <li>ðŸ‘‘ Unlimited homes & /nick custom formatting</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="openCheckout('STREAK GOD RANK', '₹999')">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('STREAK GOD RANK', 999)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- STORE VIEW: CRATES -->
                 <div id="view-crates" class="store-view" style="display: none;">
                     <div class="view-header">
-                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <button class="back-btn" onclick="switchView('home')">â† Back to Categories</button>
                         <h3>Crate Keys</h3>
                         <p class="view-subtitle">Open mystery chests at spawn to win rare gear, cosmetics, and top-tier rank upgrades!</p>
                     </div>
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">5x VOTE CRATE KEYS</h4>
-                            <div class="product-price">₹99</div>
+                            <div class="product-price">â‚¹99</div>
                             <ul class="product-features">
-                                <li>🎁 5 Master keys for the Vote Crate</li>
-                                <li>🎁 Chance to win money, XP & diamonds</li>
-                                <li>🎁 Instant delivery to in-game inventory</li>
+                                <li>ðŸŽ 5 Master keys for the Vote Crate</li>
+                                <li>ðŸŽ Chance to win money, XP & diamonds</li>
+                                <li>ðŸŽ Instant delivery to in-game inventory</li>
                             </ul>
-                            <button class="buy-btn" onclick="openCheckout('5x VOTE CRATE KEYS', '₹99')">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('5x VOTE CRATE KEYS', 99)">BUY NOW</button>
                         </div>
-
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">POPULAR</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">5x RARE CRATE KEYS</h4>
-                            <div class="product-price">₹249 <span class="old-price">₹349</span></div>
+                            <div class="product-price">â‚¹249 <span class="old-price">â‚¹349</span></div>
                             <ul class="product-features">
-                                <li>🌟 5 Master keys for the Rare Crate</li>
-                                <li>🌟 High chance for enchanted god armor</li>
-                                <li>🌟 Guaranteed rare item in every opening</li>
+                                <li>ðŸŒŸ 5 Master keys for the Rare Crate</li>
+                                <li>ðŸŒŸ High chance for enchanted god armor</li>
+                                <li>ðŸŒŸ Guaranteed rare item in every opening</li>
                             </ul>
-                            <button class="buy-btn accent-btn" onclick="openCheckout('5x RARE CRATE KEYS', '₹249')">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('5x RARE CRATE KEYS', 249)">BUY NOW</button>
                         </div>
-
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">INSANE VALUE</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">10x LEGENDARY KEYS</h4>
-                            <div class="product-price">₹599 <span class="old-price">₹899</span></div>
+                            <div class="product-price">â‚¹599 <span class="old-price">â‚¹899</span></div>
                             <ul class="product-features">
-                                <li>⚡ 10 Master keys for the Legendary Crate</li>
-                                <li>⚡ Chance to win MVP or STREAK GOD ranks!</li>
-                                <li>⚡ Server-wide chat broadcast upon opening</li>
+                                <li>âš¡ 10 Master keys for the Legendary Crate</li>
+                                <li>âš¡ Chance to win MVP or STREAK GOD ranks!</li>
+                                <li>âš¡ Server-wide chat broadcast upon opening</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="openCheckout('10x LEGENDARY KEYS', '₹599')">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('10x LEGENDARY KEYS', 599)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- STORE VIEW: BUNDLES -->
                 <div id="view-bundles" class="store-view" style="display: none;">
                     <div class="view-header">
-                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <button class="back-btn" onclick="switchView('home')">â† Back to Categories</button>
                         <h3>Value Bundles & Packs</h3>
                         <p class="view-subtitle">Get the ultimate head start with combined ranks, crate keys, and massive currency bundles!</p>
                     </div>
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Present1/64" alt="Bundle"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Present1/64" alt="Bundle"></div>
                             <h4 class="product-title">STARTER BUNDLE</h4>
-                            <div class="product-price">₹299 <span class="old-price">₹499</span></div>
+                            <div class="product-price">â‚¹299 <span class="old-price">â‚¹499</span></div>
                             <ul class="product-features">
-                                <li>🎒 VIP Rank included lifetime!</li>
-                                <li>🎒 10x Vote Keys + 2x Rare Keys</li>
-                                <li>🎒 ₹50,000 In-Game Server Balance</li>
+                                <li>ðŸŽ’ VIP Rank included lifetime!</li>
+                                <li>ðŸŽ’ 10x Vote Keys + 2x Rare Keys</li>
+                                <li>ðŸŽ’ â‚¹50,000 In-Game Server Balance</li>
                             </ul>
-                            <button class="buy-btn" onclick="openCheckout('STARTER BUNDLE', '₹299')">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('STARTER BUNDLE', 299)">BUY NOW</button>
                         </div>
-
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">MEGA PACK</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Present2/64" alt="Bundle"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Present2/64" alt="Bundle"></div>
                             <h4 class="product-title">ULTIMATE GOD BUNDLE</h4>
-                            <div class="product-price">₹1299 <span class="old-price">₹2199</span></div>
+                            <div class="product-price">â‚¹1299 <span class="old-price">â‚¹2199</span></div>
                             <ul class="product-features">
-                                <li>👑 STREAK GOD Rank lifetime included!</li>
-                                <li>👑 20x Legendary Crate Keys</li>
-                                <li>👑 Exclusive "Supporter 2026" Tag</li>
-                                <li>👑 ₹500,000 In-Game Server Balance</li>
+                                <li>ðŸ‘‘ STREAK GOD Rank lifetime included!</li>
+                                <li>ðŸ‘‘ 20x Legendary Crate Keys</li>
+                                <li>ðŸ‘‘ Exclusive "Supporter 2026" Tag</li>
+                                <li>ðŸ‘‘ â‚¹500,000 In-Game Server Balance</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="openCheckout('ULTIMATE GOD BUNDLE', '₹1299')">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('ULTIMATE GOD BUNDLE', 1299)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- STORE VIEW: COSMETICS -->
                 <div id="view-cosmetics" class="store-view" style="display: none;">
                     <div class="view-header">
-                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <button class="back-btn" onclick="switchView('home')">â† Back to Categories</button>
                         <h3>Server Cosmetics</h3>
                         <p class="view-subtitle">Stand out from the crowd with custom particle trails, floating pet buddies, and awesome capes!</p>
                     </div>
                     <div class="products-grid">
                         <div class="product-card">
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Slime/64" alt="Cosmetic"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Slime/64" alt="Cosmetic"></div>
                             <h4 class="product-title">NEON AURA TRAIL</h4>
-                            <div class="product-price">₹149</div>
+                            <div class="product-price">â‚¹149</div>
                             <ul class="product-features">
-                                <li>✨ Leaves a glowing violet particle aura</li>
-                                <li>✨ Visible in ALL server game modes & lobbies</li>
-                                <li>✨ Easily toggle with /cosmetics command</li>
+                                <li>âœ¨ Leaves a glowing violet particle aura</li>
+                                <li>âœ¨ Visible in ALL server game modes & lobbies</li>
+                                <li>âœ¨ Easily toggle with /cosmetics command</li>
                             </ul>
-                            <button class="buy-btn" onclick="openCheckout('NEON AURA TRAIL', '₹149')">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('NEON AURA TRAIL', 149)">BUY NOW</button>
                         </div>
-
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">COOL FX</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Enderman/64" alt="Cosmetic"></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Enderman/64" alt="Cosmetic"></div>
                             <h4 class="product-title">DRAGON WINGS & HALO</h4>
-                            <div class="product-price">₹349</div>
+                            <div class="product-price">â‚¹349</div>
                             <ul class="product-features">
-                                <li>🔥 Majestic animated particle wings on back</li>
-                                <li>🔥 Golden glowing halo over your head</li>
-                                <li>🔥 Custom victory emote upon winning PVP</li>
+                                <li>ðŸ”¥ Majestic animated particle wings on back</li>
+                                <li>ðŸ”¥ Golden glowing halo over your head</li>
+                                <li>ðŸ”¥ Custom victory emote upon winning PVP</li>
                             </ul>
-                            <button class="buy-btn accent-btn" onclick="openCheckout('DRAGON WINGS & HALO', '₹349')">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('DRAGON WINGS & HALO', 349)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- Recent Supporters Wide Banner -->
                 <div class="supporters-banner">
                     <div class="supporters-left">
@@ -333,8 +322,28 @@
                 </div>
             </section>
         </div>
-
         <div class="store-sidebar">
+            <!-- Player Profile Widget -->
+            <div class="sidebar-widget profile-widget" style="padding: 20px; display: flex; flex-direction: row; gap: 15px; align-items: center; justify-content: flex-start; text-align: left;">
+                <!-- Logged Out View -->
+                <div id="profile-logged-out" style="display: flex; flex-direction: row; align-items: center; gap: 15px; width: 100%; cursor: pointer;" onclick="openLoginModal()">
+                    <img src="https://mc-heads.net/body/Steve/70" style="height: 70px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));">
+                    <div>
+                        <div style="font-weight: 800; font-size: 18px;">Guest</div>
+                        <div style="color: var(--text-muted); font-size: 13px; margin-top: 4px; font-weight: 600;">Click to Login</div>
+                    </div>
+                </div>
+                
+                <!-- Logged In View -->
+                <div id="profile-logged-in" style="display: none; flex-direction: row; align-items: center; gap: 15px; width: 100%;">
+                    <img id="profile-avatar-side" src="" style="height: 80px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));">
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div id="profile-name-side" style="font-weight: 800; font-size: 18px; color: white;">Username</div>
+                        <button onclick="logout()" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='var(--text-muted)';" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; width: fit-content; transition: all 0.2s ease;">Logout</button>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Live Discord Widget -->
             <a href="https://discord.gg/jcXgZEC8Qb" target="_blank" class="sidebar-widget" style="text-decoration: none; transition: transform 0.2s ease, filter 0.2s ease;">
                 <div class="widget-icon" style="color: #5865F2;">
@@ -346,10 +355,9 @@
                     Discord Members
                 </div>
             </a>
-
             <!-- Live Player Widget -->
             <div class="sidebar-widget">
-                <div class="widget-icon">
+                <div class="hero-stat-icon" style="background: rgba(33, 150, 243, 0.1); color: var(--color-secondary);">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 </div>
                 <div class="widget-count" id="player-count">...</div>
@@ -358,7 +366,6 @@
                     Players Online
                 </div>
             </div>
-
         </div>
         </div> <!-- End of store-layout -->
         
@@ -377,7 +384,6 @@
             </div>
         </section>
     </main>
-
     <!-- Site Footer -->
     <footer class="site-footer">
         <div class="footer-content">
@@ -386,7 +392,84 @@
             <p>Regards, Maxwell0901</p>
         </div>
     </footer>
-
+    <!-- Payment Gateway Modal -->
+    <div id="payment-modal" class="modal-overlay" style="display: none; background: #0f0a18;" onclick="handlePaymentModalClick(event)">
+        <div class="payment-container" style="display: flex; width: 100vw; height: 100vh; overflow: hidden; max-width: 1400px; margin: 0 auto; background: #140c22; box-shadow: 0 0 50px rgba(0,0,0,0.8);" onclick="event.stopPropagation()">
+            
+            <!-- Left Side: Order Summary -->
+            <div class="payment-sidebar" style="width: 380px; background: #11091c; border-right: 1px solid rgba(255,255,255,0.05); padding: 40px; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                    <div id="payment-username" style="color: var(--text-muted); font-size: 15px; font-weight: 600;">Guest's order</div>
+                    <button onclick="closePaymentModal()" style="background: none; border: none; color: var(--text-muted); text-decoration: underline; cursor: pointer; font-size: 14px;">Cancel</button>
+                </div>
+                
+                <div id="payment-items-container" style="flex-grow: 1; overflow-y: auto;">
+                    <!-- Items dynamically injected here -->
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div style="color: var(--text-muted); font-size: 14px; font-weight: 700; margin-bottom: 10px;">Coupon/Gift Card</div>
+                    <input type="text" placeholder="Enter code..." style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 12px 15px; border-radius: 8px; color: white; outline: none; font-family: 'Inter', sans-serif;">
+                </div>
+            </div>
+            
+            <!-- Right Side: Payment Form -->
+            <div class="payment-main" style="flex-grow: 1; padding: 40px 60px; overflow-y: auto;">
+                <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 30px;">
+                    MineStreak Store &gt; Make Payment &gt; <span style="color: white; font-weight: 600;">Secure Checkout</span>
+                </div>
+                
+                <h3 style="font-size: 20px; font-weight: 800; color: white; margin-bottom: 15px;">Email Address</h3>
+                <input type="email" placeholder="Enter your email address" style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 16px 20px; border-radius: 8px; color: white; outline: none; font-family: 'Inter', sans-serif; font-size: 16px; margin-bottom: 30px;">
+                
+                <h3 style="font-size: 20px; font-weight: 800; color: white; margin-bottom: 15px;">Payment Method</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                    <div class="payment-method-box" onclick="selectPaymentMethod('card')" id="pm-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" style="height: 15px; filter: brightness(1.2);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" style="height: 20px;">
+                    </div>
+                    <div class="payment-method-box" onclick="selectPaymentMethod('gpay')" id="pm-gpay">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="height: 20px; margin-right: 5px;"> <span style="font-weight: 700; color: white; font-size: 18px;">Pay</span>
+                    </div>
+                    <div class="payment-method-box" onclick="selectPaymentMethod('paypal')" id="pm-paypal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" style="height: 20px;">
+                    </div>
+                    <div class="payment-method-box" onclick="selectPaymentMethod('upi')" id="pm-upi">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" style="height: 20px; filter: brightness(0) invert(1);">
+                    </div>
+                </div>
+                
+                <button style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; color: var(--text-muted); cursor: pointer; font-size: 14px; margin-bottom: 40px; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">More Payment Methods</button>
+                
+                <div id="payment-dynamic-form">
+                    <!-- Default Form Fields -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <div style="color: white; font-weight: 700; margin-bottom: 10px;">Full Name</div>
+                            <input type="text" placeholder="Enter your full name" class="payment-input">
+                        </div>
+                        <div>
+                            <div style="color: white; font-weight: 700; margin-bottom: 10px;">Zip / Postal Code</div>
+                            <input type="text" placeholder="Zip code" class="payment-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 15px; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <label class="term-checkbox" style="padding-left: 30px;">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="term-text" style="font-size: 13px;">Allow MineStreak to send me updates & announcements via email.</span>
+                    </label>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: right;">
+                    <button id="execute-payment-btn" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 14px 40px; border: none; border-radius: 8px; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3); transition: 0.2s;" onclick="executePayment()" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">Complete Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- FamPay / UPI Checkout Modal -->
     <div id="checkout-modal" class="modal-overlay" style="display: none;" onclick="handleModalClick(event)">
         <div class="modal-container">
@@ -395,7 +478,7 @@
             <div class="modal-header">
                 <span class="modal-tag">MANUAL CHECKOUT &bull; FAMPAY / UPI</span>
                 <h3 id="modal-product-title">MVP RANK</h3>
-                <div id="modal-product-price" class="modal-price">₹499</div>
+                <div id="modal-product-price" class="modal-price">â‚¹499</div>
             </div>
             
             <div class="modal-body">
@@ -404,14 +487,13 @@
                     <p class="modal-instruction">Scan this QR Code using any UPI Payment App (<strong>FamPay, GPay, PhonePe, Paytm</strong>) and transfer the exact amount:</p>
                     
                     <div class="qr-showcase">
-                        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=minestreak@fampay&color=ffffff&bgcolor=181124&margin=10" alt="FamPay QR Code">
+                        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ajiteshr@fampay&color=ffffff&bgcolor=181124&margin=10" alt="FamPay QR Code">
                         <div class="upi-id-box">
-                            <span>UPI ID: <strong id="upi-id-text">minestreak@fampay</strong></span>
+                            <span>UPI ID: <strong id="upi-id-text">ajiteshr@fampay</strong></span>
                             <button class="copy-small-btn" onclick="copyUPI(this)">COPY ID</button>
                         </div>
                     </div>
                 </div>
-
                 <div class="step-box" style="margin-top: 20px;">
                     <div class="step-title">STEP 2 &mdash; CLAIM YOUR ITEM</div>
                     <p class="modal-instruction">After paying, take a screenshot of your successful transaction. Join our official Discord server and open a support ticket with your screenshot & Minecraft username to instantly claim your reward!</p>
@@ -424,7 +506,74 @@
             </div>
         </div>
     </div>
-
-    <script src="script.js?v=8"></script>
+    
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay" style="display: none;" onclick="handleLoginModalClick(event)">
+        <div class="modal-container" style="max-width: 400px; text-align: center;">
+            <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+            <div class="modal-header">
+                <span class="modal-tag">AUTHENTICATION</span>
+                <h3>Login</h3>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Enter your Minecraft username to continue.</p>
+                <input type="text" id="username-input" class="modern-input" placeholder="Minecraft Username..." onkeydown="if(event.key === 'Enter') submitLogin()">
+                <button class="buy-btn accent-btn" style="margin-top: 15px;" onclick="submitLogin()">CONTINUE</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Modal (Checkout Flow) -->
+    <div id="cart-modal" class="modal-overlay" style="display: none;" onclick="handleCartModalClick(event)">
+        <div class="modal-container" style="max-width: 900px; width: 90vw; align-items: stretch; text-align: left; padding: 40px; justify-content: flex-start;">
+            <button class="modal-close" onclick="closeCartModal()">&times;</button>
+            
+            <div style="display: flex; justify-content: space-between; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 20px;">
+                <h3 style="font-size: 28px; font-weight: 800; margin: 0; color: #fff;">Checkout</h3>
+                <span id="cart-total-display" style="color: #4CAF50; font-weight: 900; font-size: 24px;">â‚¹0</span>
+            </div>
+            
+            <div class="checkout-table-header" style="display: grid; grid-template-columns: 2fr 1fr 1fr; color: var(--text-muted); font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;">
+                <div>Package</div>
+                <div>Price</div>
+                <div style="text-align: right;">Amount</div>
+            </div>
+            
+            <div id="cart-items-container" class="cart-items-container" style="margin-bottom: 40px;">
+                <!-- Cart items injected here via JS -->
+            </div>
+            
+            <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 20px; color: #fff;">Complete purchase</h3>
+            
+            <div class="checkout-terms" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px;">
+                <label class="term-checkbox">
+                    <input type="checkbox" id="term1" onchange="validateCheckout()">
+                    <span class="checkmark"></span>
+                    <span class="term-text">I agree with <a href="#" style="color: #d4a373; text-decoration: none;">Terms and Conditions</a> of this purchase.</span>
+                </label>
+                <label class="term-checkbox">
+                    <input type="checkbox" id="term2" onchange="validateCheckout()">
+                    <span class="checkmark"></span>
+                    <span class="term-text">I confirm that I am either over 16 or have guardian permission, and I consent to the collection and use of my data for this purchase.</span>
+                </label>
+                <label class="term-checkbox">
+                    <input type="checkbox" id="term3" onchange="validateCheckout()">
+                    <span class="checkmark"></span>
+                    <span class="term-text">I verify that the Minecraft account with the name <strong id="checkout-username-display" style="color: white;">None</strong>, which I am currently using to make this purchase, belongs to me.</span>
+                </label>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid rgba(255,255,255,0.05); padding-top: 20px; margin-top: auto;">
+                <button class="back-btn" style="background: rgba(41, 128, 185, 0.2); color: #3498db; border-color: rgba(52, 152, 219, 0.3); padding: 12px 24px;" onclick="closeCartModal()">â† Continue Shopping</button>
+                <button id="final-checkout-btn" class="buy-btn" style="width: auto; background: rgba(255, 255, 255, 0.1); color: var(--text-muted); cursor: not-allowed; padding: 12px 30px; box-shadow: none;" onclick="proceedToPayment()" disabled>Checkout â†’</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <script src="script.js?v=9"></script>
 </body>
 </html>
+
