@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineStreak &bull; Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#" onclick="switchView('home', this); return false;" class="active" id="nav-home">Home</a></li>
+            <li><a href="#" onclick="switchView('ranks', this); return false;" id="nav-ranks">Ranks</a></li>
+            <li><a href="#" onclick="switchView('bundles', this); return false;" id="nav-bundles">Bundles</a></li>
+            <li><a href="#" onclick="switchView('cosmetics', this); return false;" id="nav-cosmetics">Cosmetics</a></li>
+            <li><a href="#" onclick="switchView('crates', this); return false;" id="nav-crates">Crate Keys</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <!-- Left: Copy IP -->
+            <div class="hero-side ip-side" onclick="copyIP()">
+                <div class="icon-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                <div class="hero-text">
+                    <div class="hero-title" id="ip-text">PLAY.MineStreak.FUN</div>
+                    <div class="hero-subtitle">Click to Copy IP</div>
+                </div>
+            </div>
+
+            <!-- Right: Discord -->
+            <a href="https://discord.gg/jcXgZEC8Qb" target="_blank" class="hero-side discord-banner-block" style="text-decoration: none;">
+                <div class="discord-bubble">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </div>
+                <div class="discord-hero-text">
+                    <h3 class="discord-hero-large"><span id="hero-discord-count">...</span> USERS ONLINE</h3>
+                    <div class="discord-hero-small-wrapper">
+                        <p class="discord-hero-small default-text">DISCORD.GG/MINESTREAK</p>
+                        <p class="discord-hero-small hover-text">CLICK TO JOIN</p>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- Welcome Banner -->
+        <section class="welcome-banner">
+            <div class="banner-left">
+                <img src="https://placehold.co/64x64/2a2a2a/7b2cbf?text=MF" alt="Logo Icon" class="banner-icon">
+                <div>
+                    <h2 class="banner-title">MineStreak</h2>
+                    <p class="banner-subtitle">Welcome to our store!</p>
+                </div>
+            </div>
+            
+            <div class="banner-right">
+                <!-- Slanted Basket Block -->
+                <div class="slanted-block block-primary">
+                    <div class="block-content">
+                        <span class="block-small">Check your new</span>
+                        <span class="block-large">BASKET</span>
+                    </div>
+                </div>
+                
+                <!-- Slanted Login Block -->
+                <div class="slanted-block block-secondary">
+                    <div class="block-content">
+                        <span class="block-small">Click to login</span>
+                        <span class="block-large">NONE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Layout (Main Content + Sidebar) -->
+        <div class="store-layout">
+            
+            <div class="store-main">
+                <!-- Categories -->
+                <section class="store-content">
+                <!-- STORE VIEW: HOME (CATEGORIES) -->
+                <div id="view-home" class="store-view active">
+                    <div class="category-header">
+                        <h3>Store Categories</h3>
+                    </div>
+                    <div class="category-grid">
+                        
+                        <!-- Category: Ranks -->
+                        <a href="#" onclick="switchView('ranks'); return false;" class="category-card">
+                            <div class="category-text">
+                                <h4 class="category-title">RANKS</h4>
+                                <span class="category-subtitle">Click to view</span>
+                            </div>
+                            <div class="category-image">
+                                <img src="https://mc-heads.net/avatar/Notch/80" alt="Ranks">
+                            </div>
+                        </a>
+
+                        <!-- Category: Crates -->
+                        <a href="#" onclick="switchView('crates'); return false;" class="category-card">
+                            <div class="category-text">
+                                <h4 class="category-title">CRATES</h4>
+                                <span class="category-subtitle">Click to view</span>
+                            </div>
+                            <div class="category-image">
+                                <img src="https://mc-heads.net/avatar/MHF_Chest/80" alt="Crates">
+                            </div>
+                        </a>
+
+                        <!-- Category: Bundles -->
+                        <a href="#" onclick="switchView('bundles'); return false;" class="category-card">
+                            <div class="category-text">
+                                <h4 class="category-title">BUNDLES</h4>
+                                <span class="category-subtitle">Click to view</span>
+                            </div>
+                            <div class="category-image">
+                                <img src="https://mc-heads.net/avatar/MHF_Present1/80" alt="Bundles">
+                            </div>
+                        </a>
+
+                        <!-- Category: Cosmetics -->
+                        <a href="#" onclick="switchView('cosmetics'); return false;" class="category-card">
+                            <div class="category-text">
+                                <h4 class="category-title">COSMETICS</h4>
+                                <span class="category-subtitle">Click to view</span>
+                            </div>
+                            <div class="category-image">
+                                <img src="https://mc-heads.net/avatar/MHF_Slime/80" alt="Cosmetics">
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- STORE VIEW: RANKS -->
+                <div id="view-ranks" class="store-view" style="display: none;">
+                    <div class="view-header">
+                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <h3>Server Ranks</h3>
+                        <p class="view-subtitle">Unlock exclusive server-wide privileges, kits, prefixes, and quality-of-life commands!</p>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-badge">POPULAR</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/Notch/64" alt="VIP"></div>
+                            <h4 class="product-title">VIP RANK</h4>
+                            <div class="product-price">₹199 <span class="old-price">₹299</span></div>
+                            <ul class="product-features">
+                                <li>✨ [VIP] Chat Prefix & Name tag</li>
+                                <li>✨ Access to /kit vip (24h cooldown)</li>
+                                <li>✨ 2x Coin multiplier & vote rewards</li>
+                                <li>✨ Priority queue when server is full</li>
+                            </ul>
+                            <button class="buy-btn" onclick="openCheckout('VIP RANK', '₹199')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card featured-card">
+                            <div class="product-badge accent-badge">BEST VALUE</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Alex/64" alt="MVP"></div>
+                            <h4 class="product-title">MVP RANK</h4>
+                            <div class="product-price">₹499 <span class="old-price">₹799</span></div>
+                            <ul class="product-features">
+                                <li>🔥 [MVP] Gold Prefix & Chat color</li>
+                                <li>🔥 Access to /kit mvp & /fly in lobby</li>
+                                <li>🔥 3x Coin multiplier & vote rewards</li>
+                                <li>🔥 Create up to 5 custom homes (/sethome)</li>
+                            </ul>
+                            <button class="buy-btn accent-btn" onclick="openCheckout('MVP RANK', '₹499')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card legendary-card">
+                            <div class="product-badge legendary-badge">LEGENDARY</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Enderman/64" alt="STREAK"></div>
+                            <h4 class="product-title">STREAK GOD</h4>
+                            <div class="product-price">₹999 <span class="old-price">₹1499</span></div>
+                            <ul class="product-features">
+                                <li>👑 [STREAK GOD] Animated Chat Prefix</li>
+                                <li>👑 ALL perks from VIP & MVP included</li>
+                                <li>👑 Exclusive custom particle halos & effects</li>
+                                <li>👑 Unlimited homes & /nick custom formatting</li>
+                            </ul>
+                            <button class="buy-btn legendary-btn" onclick="openCheckout('STREAK GOD RANK', '₹999')">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORE VIEW: CRATES -->
+                <div id="view-crates" class="store-view" style="display: none;">
+                    <div class="view-header">
+                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <h3>Crate Keys</h3>
+                        <p class="view-subtitle">Open mystery chests at spawn to win rare gear, cosmetics, and top-tier rank upgrades!</p>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <h4 class="product-title">5x VOTE CRATE KEYS</h4>
+                            <div class="product-price">₹99</div>
+                            <ul class="product-features">
+                                <li>🎁 5 Master keys for the Vote Crate</li>
+                                <li>🎁 Chance to win money, XP & diamonds</li>
+                                <li>🎁 Instant delivery to in-game inventory</li>
+                            </ul>
+                            <button class="buy-btn" onclick="openCheckout('5x VOTE CRATE KEYS', '₹99')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card featured-card">
+                            <div class="product-badge accent-badge">POPULAR</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <h4 class="product-title">5x RARE CRATE KEYS</h4>
+                            <div class="product-price">₹249 <span class="old-price">₹349</span></div>
+                            <ul class="product-features">
+                                <li>🌟 5 Master keys for the Rare Crate</li>
+                                <li>🌟 High chance for enchanted god armor</li>
+                                <li>🌟 Guaranteed rare item in every opening</li>
+                            </ul>
+                            <button class="buy-btn accent-btn" onclick="openCheckout('5x RARE CRATE KEYS', '₹249')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card legendary-card">
+                            <div class="product-badge legendary-badge">INSANE VALUE</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Chest/64" alt="Crate"></div>
+                            <h4 class="product-title">10x LEGENDARY KEYS</h4>
+                            <div class="product-price">₹599 <span class="old-price">₹899</span></div>
+                            <ul class="product-features">
+                                <li>⚡ 10 Master keys for the Legendary Crate</li>
+                                <li>⚡ Chance to win MVP or STREAK GOD ranks!</li>
+                                <li>⚡ Server-wide chat broadcast upon opening</li>
+                            </ul>
+                            <button class="buy-btn legendary-btn" onclick="openCheckout('10x LEGENDARY KEYS', '₹599')">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORE VIEW: BUNDLES -->
+                <div id="view-bundles" class="store-view" style="display: none;">
+                    <div class="view-header">
+                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <h3>Value Bundles & Packs</h3>
+                        <p class="view-subtitle">Get the ultimate head start with combined ranks, crate keys, and massive currency bundles!</p>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Present1/64" alt="Bundle"></div>
+                            <h4 class="product-title">STARTER BUNDLE</h4>
+                            <div class="product-price">₹299 <span class="old-price">₹499</span></div>
+                            <ul class="product-features">
+                                <li>🎒 VIP Rank included lifetime!</li>
+                                <li>🎒 10x Vote Keys + 2x Rare Keys</li>
+                                <li>🎒 ₹50,000 In-Game Server Balance</li>
+                            </ul>
+                            <button class="buy-btn" onclick="openCheckout('STARTER BUNDLE', '₹299')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card legendary-card">
+                            <div class="product-badge legendary-badge">MEGA PACK</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Present2/64" alt="Bundle"></div>
+                            <h4 class="product-title">ULTIMATE GOD BUNDLE</h4>
+                            <div class="product-price">₹1299 <span class="old-price">₹2199</span></div>
+                            <ul class="product-features">
+                                <li>👑 STREAK GOD Rank lifetime included!</li>
+                                <li>👑 20x Legendary Crate Keys</li>
+                                <li>👑 Exclusive "Supporter 2026" Tag</li>
+                                <li>👑 ₹500,000 In-Game Server Balance</li>
+                            </ul>
+                            <button class="buy-btn legendary-btn" onclick="openCheckout('ULTIMATE GOD BUNDLE', '₹1299')">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORE VIEW: COSMETICS -->
+                <div id="view-cosmetics" class="store-view" style="display: none;">
+                    <div class="view-header">
+                        <button class="back-btn" onclick="switchView('home')">← Back to Categories</button>
+                        <h3>Server Cosmetics</h3>
+                        <p class="view-subtitle">Stand out from the crowd with custom particle trails, floating pet buddies, and awesome capes!</p>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Slime/64" alt="Cosmetic"></div>
+                            <h4 class="product-title">NEON AURA TRAIL</h4>
+                            <div class="product-price">₹149</div>
+                            <ul class="product-features">
+                                <li>✨ Leaves a glowing violet particle aura</li>
+                                <li>✨ Visible in ALL server game modes & lobbies</li>
+                                <li>✨ Easily toggle with /cosmetics command</li>
+                            </ul>
+                            <button class="buy-btn" onclick="openCheckout('NEON AURA TRAIL', '₹149')">BUY NOW</button>
+                        </div>
+
+                        <div class="product-card featured-card">
+                            <div class="product-badge accent-badge">COOL FX</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/avatar/MHF_Enderman/64" alt="Cosmetic"></div>
+                            <h4 class="product-title">DRAGON WINGS & HALO</h4>
+                            <div class="product-price">₹349</div>
+                            <ul class="product-features">
+                                <li>🔥 Majestic animated particle wings on back</li>
+                                <li>🔥 Golden glowing halo over your head</li>
+                                <li>🔥 Custom victory emote upon winning PVP</li>
+                            </ul>
+                            <button class="buy-btn accent-btn" onclick="openCheckout('DRAGON WINGS & HALO', '₹349')">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Supporters Wide Banner -->
+                <div class="supporters-banner">
+                    <div class="supporters-left">
+                        <div class="widget-icon" style="color: #FF5E5B;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="supporters-title">Recent Supporters</h3>
+                            <p class="supporters-subtitle">Support MineStreak to see your name here!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="supporters-right">
+                        <div class="widget-count">0</div>
+                        <div style="color: var(--text-muted); font-size: 14px; font-weight: 600;">
+                            No donators yet!
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="store-sidebar">
+            <!-- Live Discord Widget -->
+            <a href="https://discord.gg/jcXgZEC8Qb" target="_blank" class="sidebar-widget" style="text-decoration: none; transition: transform 0.2s ease, filter 0.2s ease;">
+                <div class="widget-icon" style="color: #5865F2;">
+                    <svg width="48" height="48" viewBox="0 0 127.14 96.36"><path fill="currentColor" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-19.32-72.15ZM42.68,65.59c-5.36,0-9.8-4.83-9.8-10.79s4.38-10.79,9.8-10.79,9.85,4.84,9.8,10.79C52.48,60.76,48.09,65.59,42.68,65.59Zm41.83,0c-5.36,0-9.8-4.83-9.8-10.79s4.38-10.79,9.8-10.79,9.85,4.84,9.8,10.79C94.31,60.76,89.92,65.59,84.51,65.59Z"/></svg>
+                </div>
+                <div class="widget-count" id="discord-count">...</div>
+                <div class="widget-label">
+                    <div class="status-dot" id="discord-dot"></div>
+                    Discord Members
+                </div>
+            </a>
+
+            <!-- Live Player Widget -->
+            <div class="sidebar-widget">
+                <div class="widget-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <div class="widget-count" id="player-count">...</div>
+                <div class="widget-label">
+                    <div class="status-dot" id="player-dot"></div>
+                    Players Online
+                </div>
+            </div>
+
+        </div>
+        </div> <!-- End of store-layout -->
+        
+        <!-- Info Cards Section -->
+        <section class="info-section">
+            <div class="info-card">
+                <div class="card-accent"></div>
+                <h4>Information</h4>
+                <p>Running a high-quality server requires constant dedication and resources. When you make a purchase on the MineStreak store, you are directly funding our development and helping us bring exciting new updates to the community. Your support ensures we stay online and thriving for years to come!</p>
+            </div>
+            <!-- Privacy Card -->
+            <div class="info-card">
+                <div class="card-accent"></div>
+                <h4>Privacy</h4>
+                <p>All transactions are processed directly and securely via UPI (FamPay). We never ask for your passwords or sensitive banking details, ensuring complete privacy and safety. All payments are manually verified by our team. For any questions or support, please reach out via our Discord.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 MineStreak. All rights reserved.</p>
+            <p>If you have any doubts/questions/problems, please create a ticket in our official Discord server.</p>
+            <p>Regards, Maxwell0901</p>
+        </div>
+    </footer>
+
+    <!-- FamPay / UPI Checkout Modal -->
+    <div id="checkout-modal" class="modal-overlay" style="display: none;" onclick="handleModalClick(event)">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeCheckout()">&times;</button>
+            
+            <div class="modal-header">
+                <span class="modal-tag">MANUAL CHECKOUT &bull; FAMPAY / UPI</span>
+                <h3 id="modal-product-title">MVP RANK</h3>
+                <div id="modal-product-price" class="modal-price">₹499</div>
+            </div>
+            
+            <div class="modal-body">
+                <div class="step-box">
+                    <div class="step-title">STEP 1 &mdash; SCAN TO PAY</div>
+                    <p class="modal-instruction">Scan this QR Code using any UPI Payment App (<strong>FamPay, GPay, PhonePe, Paytm</strong>) and transfer the exact amount:</p>
+                    
+                    <div class="qr-showcase">
+                        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=minestreak@fampay&color=ffffff&bgcolor=181124&margin=10" alt="FamPay QR Code">
+                        <div class="upi-id-box">
+                            <span>UPI ID: <strong id="upi-id-text">minestreak@fampay</strong></span>
+                            <button class="copy-small-btn" onclick="copyUPI(this)">COPY ID</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-box" style="margin-top: 20px;">
+                    <div class="step-title">STEP 2 &mdash; CLAIM YOUR ITEM</div>
+                    <p class="modal-instruction">After paying, take a screenshot of your successful transaction. Join our official Discord server and open a support ticket with your screenshot & Minecraft username to instantly claim your reward!</p>
+                    
+                    <a href="https://discord.gg/jcXgZEC8Qb" target="_blank" class="claim-discord-btn">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        JOIN DISCORD TO SUBMIT TICKET
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=8"></script>
+</body>
+</html>
