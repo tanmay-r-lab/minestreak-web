@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MineStreak &bull; Official Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=11">
-    <link rel="icon" type="image/png" href="favicon.png?v=3">
+    <link rel="stylesheet" href="style.css?v=13">
+    <link rel="icon" type="image/png" href="favicon.png?v=5">
 </head>
 <body>
     <!-- Navigation -->
@@ -144,7 +144,7 @@
                     </div>
                 </div>
 
-                <!-- STORE VIEW: RANKS (Highest to Lowest) -->
+                <!-- STORE VIEW: RANKS (Float+ Top, Elite Starter) -->
                 <div id="view-ranks" class="store-view" style="display: none;">
                     <div class="view-header">
                         <button class="back-btn" onclick="switchView('home')">&larr; Back to Categories</button>
@@ -153,102 +153,102 @@
                     </div>
                     
                     <div class="products-grid">
-                        <!-- 1. ELITE RANK (Supreme Highest Tier) -->
+                        <!-- 1. FLOAT + RANK (Top Supreme Tier) -->
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">SUPREME TIER</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Enderman/64" alt="Elite"></div>
-                            <h4 class="product-title">ELITE RANK</h4>
-                            <div class="product-price">₹999 <span class="old-price">₹1499</span></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Enderman/64" alt="Float+"></div>
+                            <h4 class="product-title">FLOAT + RANK</h4>
+                            <div class="product-price">₹799 <span class="old-price">₹1299</span></div>
                             <ul class="product-features">
-                                <li>👑 [ELITE] Glowing Animated Prefix & Nametag</li>
-                                <li>👑 All perks from Lord, Mystical, Titan & Assassin</li>
-                                <li>👑 Access to /kit elite & /fly in all survival worlds</li>
+                                <li>👑 [FLOAT+] Ultimate Glowing Animated Prefix</li>
+                                <li>👑 All perks from Assassin, Titan, Mystical, Lord & Elite</li>
+                                <li>👑 Access to /kit float+, /fly anywhere, /god, /heal</li>
                                 <li>👑 10x Coin Multiplier & supreme vote rewards</li>
                                 <li>👑 Unlimited homes (/sethome) & priority queue</li>
-                                <li>👑 Exclusive glowing Elite Halo & particle auras</li>
+                                <li>👑 Exclusive glowing Float+ Halo & particle auras</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="addToCart('ELITE RANK', 999)">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('FLOAT+ RANK', 799)">BUY NOW</button>
                         </div>
 
-                        <!-- 2. LORD RANK (Tier 5) -->
+                        <!-- 2. ASSASSIN RANK (Tier 5) -->
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">TIER 5</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/body/King/64" alt="Lord"></div>
-                            <h4 class="product-title">LORD RANK</h4>
-                            <div class="product-price">₹749 <span class="old-price">₹999</span></div>
-                            <ul class="product-features">
-                                <li>⚡ [LORD] Radiant Gold Prefix & Chat color</li>
-                                <li>⚡ All perks from Mystical, Titan, Assassin & Float+</li>
-                                <li>⚡ Access to /kit lord & /fly commands</li>
-                                <li>⚡ 7x Coin Multiplier & custom drop party triggers</li>
-                                <li>⚡ 25 Custom homes (/sethome) & /near command</li>
-                                <li>⚡ Lord Particle Aura & victory emote</li>
-                            </ul>
-                            <button class="buy-btn accent-btn" onclick="addToCart('LORD RANK', 749)">BUY NOW</button>
-                        </div>
-
-                        <!-- 3. MYSTICAL RANK (Tier 4) -->
-                        <div class="product-card">
-                            <div class="product-badge">TIER 4</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/body/Wizard/64" alt="Mystical"></div>
-                            <h4 class="product-title">MYSTICAL RANK</h4>
-                            <div class="product-price">₹499 <span class="old-price">₹699</span></div>
-                            <ul class="product-features">
-                                <li>✨ [MYSTICAL] Mystic Blue Animated Prefix</li>
-                                <li>✨ Access to /kit mystical, /feed, /workbench & /anvil</li>
-                                <li>✨ 5x Coin Multiplier & double vote keys</li>
-                                <li>✨ 15 Custom homes (/sethome)</li>
-                                <li>✨ Mystic Swirl particle trail effect</li>
-                            </ul>
-                            <button class="buy-btn" onclick="addToCart('MYSTICAL RANK', 499)">BUY NOW</button>
-                        </div>
-
-                        <!-- 4. TITAN RANK (Tier 3) -->
-                        <div class="product-card">
-                            <div class="product-badge">TIER 3</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/body/Golem/64" alt="Titan"></div>
-                            <h4 class="product-title">TITAN RANK</h4>
-                            <div class="product-price">₹349 <span class="old-price">₹499</span></div>
-                            <ul class="product-features">
-                                <li>🛡️ [TITAN] Cyan Bold Prefix & Name tag</li>
-                                <li>🛡️ Access to /kit titan & /condense command</li>
-                                <li>🛡️ 4x Coin Multiplier</li>
-                                <li>🛡️ 10 Custom homes (/sethome)</li>
-                                <li>🛡️ Titan Ground Slam victory effect</li>
-                            </ul>
-                            <button class="buy-btn" onclick="addToCart('TITAN RANK', 349)">BUY NOW</button>
-                        </div>
-
-                        <!-- 5. ASSASSIN RANK (Tier 2) -->
-                        <div class="product-card">
-                            <div class="product-badge">TIER 2</div>
                             <div class="product-icon"><img src="https://mc-heads.net/body/Assassin/64" alt="Assassin"></div>
                             <h4 class="product-title">ASSASSIN RANK</h4>
-                            <div class="product-price">₹199 <span class="old-price">₹299</span></div>
+                            <div class="product-price">₹549 <span class="old-price">₹899</span></div>
                             <ul class="product-features">
                                 <li>⚔️ [ASSASSIN] Shadow Prefix & Dark Chat color</li>
-                                <li>⚔️ Access to /kit assassin & /hat command</li>
-                                <li>⚔️ 3x Coin Multiplier</li>
-                                <li>⚔️ 6 Custom homes (/sethome)</li>
-                                <li>⚔️ Shadow Smoke particle trail</li>
+                                <li>⚔️ All perks from Titan, Mystical, Lord & Elite included</li>
+                                <li>⚔️ Access to /kit assassin & /fly commands</li>
+                                <li>⚔️ 7x Coin Multiplier & custom drop party triggers</li>
+                                <li>⚔️ 25 Custom homes (/sethome) & /near command</li>
+                                <li>⚔️ Shadow Smoke particle aura & victory emote</li>
                             </ul>
-                            <button class="buy-btn" onclick="addToCart('ASSASSIN RANK', 199)">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('ASSASSIN RANK', 549)">BUY NOW</button>
                         </div>
 
-                        <!-- 6. FLOAT + RANK (Tier 1) -->
+                        <!-- 3. TITAN RANK (Tier 4) -->
+                        <div class="product-card">
+                            <div class="product-badge">TIER 4</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/Golem/64" alt="Titan"></div>
+                            <h4 class="product-title">TITAN RANK</h4>
+                            <div class="product-price">₹379 <span class="old-price">₹599</span></div>
+                            <ul class="product-features">
+                                <li>🛡️ [TITAN] Cyan Bold Prefix & Nametag</li>
+                                <li>🛡️ Access to /kit titan, /condense, /feed & /workbench</li>
+                                <li>🛡️ 5x Coin Multiplier & double vote keys</li>
+                                <li>🛡️ 15 Custom homes (/sethome)</li>
+                                <li>🛡️ Titan Ground Slam particle trail effect</li>
+                            </ul>
+                            <button class="buy-btn" onclick="addToCart('TITAN RANK', 379)">BUY NOW</button>
+                        </div>
+
+                        <!-- 4. MYSTICAL RANK (Tier 3) -->
+                        <div class="product-card">
+                            <div class="product-badge">TIER 3</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/Wizard/64" alt="Mystical"></div>
+                            <h4 class="product-title">MYSTICAL RANK</h4>
+                            <div class="product-price">₹249 <span class="old-price">₹399</span></div>
+                            <ul class="product-features">
+                                <li>✨ [MYSTICAL] Mystic Blue Animated Prefix</li>
+                                <li>✨ Access to /kit mystical & /anvil command</li>
+                                <li>✨ 4x Coin Multiplier</li>
+                                <li>✨ 10 Custom homes (/sethome)</li>
+                                <li>✨ Mystic Swirl victory effect</li>
+                            </ul>
+                            <button class="buy-btn" onclick="addToCart('MYSTICAL RANK', 249)">BUY NOW</button>
+                        </div>
+
+                        <!-- 5. LORD RANK (Tier 2) -->
+                        <div class="product-card">
+                            <div class="product-badge">TIER 2</div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/King/64" alt="Lord"></div>
+                            <h4 class="product-title">LORD RANK</h4>
+                            <div class="product-price">₹149 <span class="old-price">₹249</span></div>
+                            <ul class="product-features">
+                                <li>⚡ [LORD] Radiant Gold Prefix & Chat color</li>
+                                <li>⚡ Access to /kit lord & /hat command</li>
+                                <li>⚡ 3x Coin Multiplier</li>
+                                <li>⚡ 6 Custom homes (/sethome)</li>
+                                <li>⚡ Radiant Spark particle trail</li>
+                            </ul>
+                            <button class="buy-btn" onclick="addToCart('LORD RANK', 149)">BUY NOW</button>
+                        </div>
+
+                        <!-- 6. ELITE RANK (Starter Tier 1) -->
                         <div class="product-card">
                             <div class="product-badge">STARTER</div>
-                            <div class="product-icon"><img src="https://mc-heads.net/body/Ninja/64" alt="Float+"></div>
-                            <h4 class="product-title">FLOAT + RANK</h4>
-                            <div class="product-price">₹99 <span class="old-price">₹149</span></div>
+                            <div class="product-icon"><img src="https://mc-heads.net/body/Ninja/64" alt="Elite"></div>
+                            <h4 class="product-title">ELITE RANK</h4>
+                            <div class="product-price">₹69 <span class="old-price">₹129</span></div>
                             <ul class="product-features">
-                                <li>🪶 [FLOAT+] Light Blue Prefix & Chat tag</li>
-                                <li>🪶 Access to /kit float & /fly in server lobby</li>
+                                <li>🪶 [ELITE] Light Blue Prefix & Chat tag</li>
+                                <li>🪶 Access to /kit elite & /fly in server lobby</li>
                                 <li>🪶 2x Coin Multiplier & extra daily rewards</li>
                                 <li>🪶 3 Custom homes (/sethome)</li>
-                                <li>🪶 Priority queue connection</li>
+                                <li>🪶 Priority server connection</li>
                             </ul>
-                            <button class="buy-btn" onclick="addToCart('FLOAT+ RANK', 99)">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('ELITE RANK', 69)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -264,37 +264,37 @@
                         <div class="product-card">
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">5x VOTE CRATE KEYS</h4>
-                            <div class="product-price">₹99</div>
+                            <div class="product-price">₹69 <span class="old-price">₹99</span></div>
                             <ul class="product-features">
                                 <li>🎁 5 Master keys for the Vote Crate</li>
                                 <li>🎁 Chance to win money, XP & diamonds</li>
                                 <li>🎁 Instant delivery to in-game inventory</li>
                             </ul>
-                            <button class="buy-btn" onclick="addToCart('5x VOTE CRATE KEYS', 99)">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('5x VOTE CRATE KEYS', 69)">BUY NOW</button>
                         </div>
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">POPULAR</div>
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">5x RARE CRATE KEYS</h4>
-                            <div class="product-price">₹249 <span class="old-price">₹349</span></div>
+                            <div class="product-price">₹199 <span class="old-price">₹299</span></div>
                             <ul class="product-features">
                                 <li>🌟 5 Master keys for the Rare Crate</li>
                                 <li>🌟 High chance for enchanted god armor</li>
                                 <li>🌟 Guaranteed rare item in every opening</li>
                             </ul>
-                            <button class="buy-btn accent-btn" onclick="addToCart('5x RARE CRATE KEYS', 249)">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('5x RARE CRATE KEYS', 199)">BUY NOW</button>
                         </div>
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">INSANE VALUE</div>
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Chest/64" alt="Crate"></div>
                             <h4 class="product-title">10x LEGENDARY KEYS</h4>
-                            <div class="product-price">₹599 <span class="old-price">₹899</span></div>
+                            <div class="product-price">₹499 <span class="old-price">₹799</span></div>
                             <ul class="product-features">
                                 <li>⚡ 10 Master keys for the Legendary Crate</li>
-                                <li>⚡ Chance to win MYSTICAL, LORD or ELITE ranks!</li>
+                                <li>⚡ Chance to win ASSASSIN or FLOAT + ranks!</li>
                                 <li>⚡ Server-wide chat broadcast upon opening</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="addToCart('10x LEGENDARY KEYS', 599)">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('10x LEGENDARY KEYS', 499)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -310,26 +310,26 @@
                         <div class="product-card">
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Present1/64" alt="Bundle"></div>
                             <h4 class="product-title">STARTER BUNDLE</h4>
-                            <div class="product-price">₹299 <span class="old-price">₹499</span></div>
+                            <div class="product-price">₹249 <span class="old-price">₹399</span></div>
                             <ul class="product-features">
-                                <li>🎒 FLOAT + Rank included lifetime!</li>
+                                <li>🎒 ELITE Rank included lifetime!</li>
                                 <li>🎒 10x Vote Keys + 2x Rare Keys</li>
                                 <li>🎒 ₹50,000 In-Game Server Balance</li>
                             </ul>
-                            <button class="buy-btn" onclick="addToCart('STARTER BUNDLE', 299)">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('STARTER BUNDLE', 249)">BUY NOW</button>
                         </div>
                         <div class="product-card legendary-card">
                             <div class="product-badge legendary-badge">MEGA PACK</div>
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Present2/64" alt="Bundle"></div>
-                            <h4 class="product-title">ULTIMATE ELITE BUNDLE</h4>
-                            <div class="product-price">₹1299 <span class="old-price">₹2199</span></div>
+                            <h4 class="product-title">ULTIMATE FLOAT+ BUNDLE</h4>
+                            <div class="product-price">₹999 <span class="old-price">₹1799</span></div>
                             <ul class="product-features">
-                                <li>👑 ELITE Rank lifetime included!</li>
+                                <li>👑 FLOAT + Rank lifetime included!</li>
                                 <li>👑 20x Legendary Crate Keys</li>
                                 <li>👑 Exclusive "Supporter 2026" Tag</li>
                                 <li>👑 ₹500,000 In-Game Server Balance</li>
                             </ul>
-                            <button class="buy-btn legendary-btn" onclick="addToCart('ULTIMATE ELITE BUNDLE', 1299)">BUY NOW</button>
+                            <button class="buy-btn legendary-btn" onclick="addToCart('ULTIMATE FLOAT+ BUNDLE', 999)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -345,25 +345,25 @@
                         <div class="product-card">
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Slime/64" alt="Cosmetic"></div>
                             <h4 class="product-title">NEON AURA TRAIL</h4>
-                            <div class="product-price">₹149</div>
+                            <div class="product-price">₹129 <span class="old-price">₹199</span></div>
                             <ul class="product-features">
                                 <li>✨ Leaves a glowing blue particle aura</li>
                                 <li>✨ Visible in ALL server game modes & lobbies</li>
                                 <li>✨ Easily toggle with /cosmetics command</li>
                             </ul>
-                            <button class="buy-btn" onclick="addToCart('NEON AURA TRAIL', 149)">BUY NOW</button>
+                            <button class="buy-btn" onclick="addToCart('NEON AURA TRAIL', 129)">BUY NOW</button>
                         </div>
                         <div class="product-card featured-card">
                             <div class="product-badge accent-badge">COOL FX</div>
                             <div class="product-icon"><img src="https://mc-heads.net/body/MHF_Enderman/64" alt="Cosmetic"></div>
                             <h4 class="product-title">DRAGON WINGS & HALO</h4>
-                            <div class="product-price">₹349</div>
+                            <div class="product-price">₹299 <span class="old-price">₹449</span></div>
                             <ul class="product-features">
                                 <li>🔥 Majestic animated particle wings on back</li>
                                 <li>🔥 Cyan glowing halo over your head</li>
                                 <li>🔥 Custom victory emote upon winning PVP</li>
                             </ul>
-                            <button class="buy-btn accent-btn" onclick="addToCart('DRAGON WINGS & HALO', 349)">BUY NOW</button>
+                            <button class="buy-btn accent-btn" onclick="addToCart('DRAGON WINGS & HALO', 299)">BUY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -395,7 +395,7 @@
             <div class="sidebar-widget profile-widget" style="padding: 20px; display: flex; flex-direction: row; gap: 15px; align-items: center; justify-content: flex-start; text-align: left;">
                 <!-- Logged Out View -->
                 <div id="profile-logged-out" style="display: flex; flex-direction: row; align-items: center; gap: 15px; width: 100%; cursor: pointer;" onclick="openLoginModal()">
-                    <img src="https://mc-heads.net/body/Steve/70" style="height: 70px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));">
+                    <img src="https://mc-heads.net/body/Steve/70" style="height: 70px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));" alt="Guest">
                     <div>
                         <div style="font-weight: 800; font-size: 18px; color: var(--text-main);">Guest</div>
                         <div style="color: var(--color-primary); font-size: 13px; margin-top: 4px; font-weight: 700;">Click to Login</div>
@@ -404,7 +404,7 @@
                 
                 <!-- Logged In View -->
                 <div id="profile-logged-in" style="display: none; flex-direction: row; align-items: center; gap: 15px; width: 100%;">
-                    <img id="profile-avatar-side" src="" style="height: 80px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));">
+                    <img id="profile-avatar-side" src="" style="height: 80px; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));" alt="Avatar">
                     <div style="display: flex; flex-direction: column; gap: 8px;">
                         <div id="profile-name-side" style="font-weight: 800; font-size: 18px; color: var(--text-main);">Username</div>
                         <button onclick="logout()" style="background: rgba(2, 132, 199, 0.08); border: 1px solid var(--border-subtle); color: var(--color-primary); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; width: fit-content; transition: all 0.2s ease;">Logout</button>
@@ -470,8 +470,8 @@
             
             <div class="modal-header">
                 <span class="modal-tag">MANUAL CHECKOUT &bull; FAMPAY / UPI</span>
-                <h3 id="modal-product-title">ELITE RANK</h3>
-                <div id="modal-product-price" class="modal-price">₹999</div>
+                <h3 id="modal-product-title">FLOAT + RANK</h3>
+                <div id="modal-product-price" class="modal-price">₹799</div>
             </div>
             
             <div class="modal-body" style="width: 100%;">
@@ -558,6 +558,6 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container"></div>
     
-    <script src="script.js?v=11"></script>
+    <script src="script.js?v=13"></script>
 </body>
 </html>

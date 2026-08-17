@@ -3,92 +3,100 @@ function copyIP() {
     const ip = "play.minestreak.fun";
     navigator.clipboard.writeText(ip).then(() => {
         const ipText = document.getElementById("ip-text");
+        if (!ipText) return;
         const originalText = ipText.innerText;
         ipText.innerText = "IP COPIED!";
-        ipText.style.color = "#4CAF50";
+        ipText.style.color = "#10b981";
         setTimeout(() => {
             ipText.innerText = originalText;
-            ipText.style.color = "white";
+            ipText.style.color = "";
         }, 2000);
     }).catch(err => {
         console.error('Failed to copy text: ', err);
     });
 }
+
 // Fetch Player Count
 document.addEventListener("DOMContentLoaded", () => {
     const playerCountElement = document.getElementById("player-count");
     const playerDot = document.getElementById("player-dot");
     
     async function fetchPlayerCount() {
+        if (!playerCountElement) return;
         try {
-            // NOTE: Replace play.minestreak.fun with your actual server IP
             const response = await fetch("https://api.mcsrvstat.us/2/play.minestreak.fun");
             const data = await response.json();
             
             if (data.online) {
                 playerCountElement.innerText = data.players.online;
-                playerDot.style.backgroundColor = "#4CAF50"; // Green
-                playerDot.style.boxShadow = "0 0 10px rgba(76, 175, 80, 0.6)";
+                if (playerDot) {
+                    playerDot.style.backgroundColor = "#10b981";
+                    playerDot.style.boxShadow = "0 0 10px rgba(16, 185, 129, 0.6)";
+                }
             } else {
                 playerCountElement.innerText = "0";
-                playerDot.style.backgroundColor = "#FF5E5B"; // Red
-                playerDot.style.boxShadow = "0 0 10px rgba(255, 94, 91, 0.6)";
+                if (playerDot) {
+                    playerDot.style.backgroundColor = "#ef4444";
+                    playerDot.style.boxShadow = "0 0 10px rgba(239, 68, 68, 0.6)";
+                }
             }
         } catch (error) {
             console.error("Error fetching player count:", error);
-            playerCountElement.innerText = "?";
+            if (playerCountElement) playerCountElement.innerText = "0";
         }
     }
     fetchPlayerCount();
-    setInterval(fetchPlayerCount, 5000); // Update every 5 seconds
+    setInterval(fetchPlayerCount, 10000);
 });
+
 // Fetch Discord Member Count
 document.addEventListener("DOMContentLoaded", () => {
     const discordCountElement = document.getElementById("discord-count");
     const discordDot = document.getElementById("discord-dot");
+    const heroDiscordElement = document.getElementById("hero-discord-count");
+
     async function fetchDiscordCount() {
         try {
-            // NOTE: Make sure widget is enabled in your discord server settings
             const inviteCode = "jcXgZEC8Qb";
             const response = await fetch(`https://discord.com/api/v9/invites/${inviteCode}?with_counts=true`);
             const data = await response.json();
             
             if (data.approximate_member_count) {
-                discordCountElement.innerText = data.approximate_member_count;
-                discordDot.style.backgroundColor = "#4CAF50"; // Green
-                discordDot.style.boxShadow = "0 0 10px rgba(76, 175, 80, 0.6)";
-                const heroDiscordElement = document.getElementById("hero-discord-count");
+                if (discordCountElement) discordCountElement.innerText = data.approximate_member_count;
+                if (discordDot) {
+                    discordDot.style.backgroundColor = "#10b981";
+                    discordDot.style.boxShadow = "0 0 10px rgba(16, 185, 129, 0.6)";
+                }
                 if (heroDiscordElement) {
                     heroDiscordElement.innerText = data.approximate_presence_count || data.approximate_member_count;
                 }
             }
         } catch (error) {
             console.error("Error fetching Discord count:", error);
-            discordCountElement.innerText = "?";
-            const heroDiscordElement = document.getElementById("hero-discord-count");
-            if (heroDiscordElement) heroDiscordElement.innerText = "?";
+            if (discordCountElement) discordCountElement.innerText = "50+";
+            if (heroDiscordElement) heroDiscordElement.innerText = "20+";
         }
     }
     fetchDiscordCount();
-    setInterval(fetchDiscordCount, 5000);
+    setInterval(fetchDiscordCount, 15000);
 });
+
 // ==========================================
 // SPA CATEGORY VIEW SWITCHER
 // ==========================================
 function switchView(viewName, clickedElement = null) {
-    // Hide all views
     const allViews = document.querySelectorAll('.store-view');
     allViews.forEach(view => {
         view.style.display = 'none';
         view.classList.remove('active');
     });
-    // Show target view
+
     const targetView = document.getElementById(`view-${viewName}`);
     if (targetView) {
         targetView.style.display = 'block';
         setTimeout(() => targetView.classList.add('active'), 10);
     }
-    // Full screen category logic
+
     const welcomeBanner = document.querySelector('.welcome-banner');
     const storeLayout = document.querySelector('.store-layout');
     
@@ -101,7 +109,7 @@ function switchView(viewName, clickedElement = null) {
             storeLayout.classList.add('full-width');
         }
     }
-    // Update active navbar link
+
     const allNavLinks = document.querySelectorAll('.nav-links a');
     allNavLinks.forEach(link => link.classList.remove('active'));
     if (clickedElement) {
@@ -112,12 +120,13 @@ function switchView(viewName, clickedElement = null) {
             matchingNavLink.classList.add('active');
         }
     }
-    // Smooth scroll to top of store section if scrolled way down
+
     const storeSection = document.querySelector('.store-layout');
     if (storeSection && window.scrollY > storeSection.offsetTop) {
         storeSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
+
 // ==========================================
 // CHECKOUT MODAL & UPI PAYMENT LOGIC
 // ==========================================
@@ -130,45 +139,44 @@ function openCheckout(productTitle, productPrice) {
     if (titleElement) titleElement.innerText = productTitle;
     if (priceElement) priceElement.innerText = productPrice;
     
-    // Extract numerical amount and dynamically generate UPI QR code
     if (qrImage && productPrice) {
-        const amount = productPrice.replace(/\D/g, ''); // Removes the ₹ symbol to get just the number
+        const amount = String(productPrice).replace(/\D/g, '');
         const upiString = `upi://pay?pa=ajiteshr@fampay&pn=MineStreak&cu=INR&am=${amount}`;
-        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=ffffff&bgcolor=181124&margin=10&data=${encodeURIComponent(upiString)}`;
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=0f172a&bgcolor=ffffff&margin=10&data=${encodeURIComponent(upiString)}`;
     }
     
     if (modal) {
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
     }
 }
+
 function closeCheckout() {
     const modal = document.getElementById('checkout-modal');
     if (modal) {
         modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Restore scrolling
+        document.body.style.overflow = 'auto';
     }
 }
+
 function handleModalClick(event) {
     const modal = document.getElementById('checkout-modal');
     if (event.target === modal) {
         closeCheckout();
     }
 }
-// Copy UPI ID to clipboard with visual confirmation
+
 function copyUPI(buttonElement) {
     const upiID = document.getElementById("upi-id-text") ? document.getElementById("upi-id-text").innerText : "ajiteshr@fampay";
     
     navigator.clipboard.writeText(upiID).then(() => {
         const originalText = buttonElement.innerText;
-        const originalBg = buttonElement.style.backgroundColor;
-        
         buttonElement.innerText = "COPIED!";
-        buttonElement.style.backgroundColor = "#4CAF50";
+        buttonElement.style.backgroundColor = "#10b981";
         
         setTimeout(() => {
             buttonElement.innerText = originalText;
-            buttonElement.style.backgroundColor = originalBg;
+            buttonElement.style.backgroundColor = "";
         }, 2000);
     }).catch(err => {
         console.error('Failed to copy UPI: ', err);
@@ -198,30 +206,26 @@ function updateLoginUI() {
     const profileNameSide = document.getElementById('profile-name-side');
     
     if (username) {
-        // Update top banner
-        if(loginSubtitle) loginSubtitle.innerText = "Logged in as";
-        if(loginTitle) loginTitle.innerText = username.toUpperCase();
-        if(loginAvatar) {
-            loginAvatar.src = `https://mc-heads.net/avatar/${username}/40`;
+        if (loginSubtitle) loginSubtitle.innerText = "Logged in as";
+        if (loginTitle) loginTitle.innerText = username.toUpperCase();
+        if (loginAvatar) {
+            loginAvatar.src = `https://mc-heads.net/avatar/${username}/36`;
             loginAvatar.style.display = "block";
         }
         
-        // Update sidebar widget
-        if(profileLoggedOut) profileLoggedOut.style.display = "none";
-        if(profileLoggedIn) {
+        if (profileLoggedOut) profileLoggedOut.style.display = "none";
+        if (profileLoggedIn) {
             profileLoggedIn.style.display = "flex";
-            if(profileAvatarSide) profileAvatarSide.src = `https://mc-heads.net/body/${username}/80`;
-            if(profileNameSide) profileNameSide.innerText = username;
+            if (profileAvatarSide) profileAvatarSide.src = `https://mc-heads.net/body/${username}/80`;
+            if (profileNameSide) profileNameSide.innerText = username;
         }
     } else {
-        // Update top banner
-        if(loginSubtitle) loginSubtitle.innerText = "Click to login";
-        if(loginTitle) loginTitle.innerText = "NONE";
-        if(loginAvatar) loginAvatar.style.display = "none";
+        if (loginSubtitle) loginSubtitle.innerText = "Click to login";
+        if (loginTitle) loginTitle.innerText = "NONE";
+        if (loginAvatar) loginAvatar.style.display = "none";
         
-        // Update sidebar widget
-        if(profileLoggedIn) profileLoggedIn.style.display = "none";
-        if(profileLoggedOut) profileLoggedOut.style.display = "flex";
+        if (profileLoggedIn) profileLoggedIn.style.display = "none";
+        if (profileLoggedOut) profileLoggedOut.style.display = "flex";
     }
 }
 
@@ -236,6 +240,8 @@ function updateBasketUI() {
     const basketCount = document.getElementById('basket-count');
     const basketTotal = document.getElementById('basket-total');
     
+    if (!basketCount || !basketTotal) return;
+
     if (cart.length > 0) {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         basketCount.innerText = `${cart.length} Item${cart.length > 1 ? 's' : ''}`;
@@ -253,14 +259,14 @@ function showToast(message) {
     
     const toast = document.createElement('div');
     toast.className = 'toast';
-    toast.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ${message}`;
+    toast.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> <span>${message}</span>`;
     
     container.appendChild(toast);
     
     setTimeout(() => {
         toast.classList.add('hiding');
         setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    }, 3200);
 }
 
 // ---- CART LOGIC ----
@@ -275,7 +281,6 @@ function addToCart(title, price) {
     updateBasketUI();
     showToast(`Added ${title} to basket!`);
     
-    // Automatically open the cart for convenience
     openCartModal();
 }
 
@@ -291,18 +296,16 @@ function openCartModal() {
     const modal = document.getElementById('cart-modal');
     if (!modal) return;
     
-    // Inject username into terms
     const checkoutUsername = document.getElementById('checkout-username-display');
     if (checkoutUsername) {
         checkoutUsername.innerText = username ? username : "Guest";
     }
     
-    // Reset checkboxes
     ['term1', 'term2', 'term3'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.checked = false;
     });
-    validateCheckout(); // disable button initially
+    validateCheckout();
     
     renderCart();
     modal.style.display = 'flex';
@@ -327,15 +330,15 @@ function validateCheckout() {
     const btn = document.getElementById('final-checkout-btn');
     if (!btn || !t1 || !t2 || !t3) return;
     
-    if (t1.checked && t2.checked && t3.checked) {
+    if (t1.checked && t2.checked && t3.checked && cart.length > 0) {
         btn.disabled = false;
-        btn.style.background = 'linear-gradient(135deg, #d4a373 0%, #b8865a 100%)';
-        btn.style.color = '#fff';
+        btn.style.background = 'linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%)';
+        btn.style.color = '#ffffff';
         btn.style.cursor = 'pointer';
-        btn.style.boxShadow = '0 6px 20px rgba(212, 163, 115, 0.3)';
+        btn.style.boxShadow = '0 6px 20px rgba(29, 78, 216, 0.35)';
     } else {
         btn.disabled = true;
-        btn.style.background = 'rgba(255, 255, 255, 0.1)';
+        btn.style.background = 'rgba(2, 132, 199, 0.1)';
         btn.style.color = 'var(--text-muted)';
         btn.style.cursor = 'not-allowed';
         btn.style.boxShadow = 'none';
@@ -350,7 +353,7 @@ function renderCart() {
     container.innerHTML = '';
     
     if (cart.length === 0) {
-        container.innerHTML = `<div class="empty-cart-msg">Your basket is empty.</div>`;
+        container.innerHTML = `<div class="empty-cart-msg">Your shopping basket is empty. Click any "BUY NOW" button to add items!</div>`;
         totalDisplay.innerText = '₹0';
         return;
     }
@@ -360,20 +363,14 @@ function renderCart() {
         total += item.price;
         const div = document.createElement('div');
         div.className = 'cart-item';
-        div.style = 'display: grid; grid-template-columns: 2fr 1fr 1fr; align-items: center; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; padding: 20px 0; background: transparent; margin: 0;';
         div.innerHTML = `
-            <div class="cart-item-title" style="color: #fff; font-weight: 700; font-size: 16px;">${item.title}</div>
-            <div class="cart-item-price" style="color: #d4a373; font-weight: 700; font-size: 16px;">₹${item.price}</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
-                <div style="background: rgba(0,0,0,0.3); border-radius: 6px; display: flex; align-items: center; padding: 4px 12px; gap: 12px; font-weight: 700;">
-                    <span style="cursor: pointer; color: var(--text-muted); user-select: none;">-</span>
-                    <span>1</span>
-                    <span style="cursor: pointer; color: var(--text-muted); user-select: none;">+</span>
-                </div>
-                <button class="cart-remove-btn" style="background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; transition: 0.2s;" onclick="removeFromCart(${index})" onmouseover="this.style.background='#e74c3c'; this.style.color='#fff';" onmouseout="this.style.background='rgba(231, 76, 60, 0.2)'; this.style.color='#e74c3c';">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                </button>
+            <div class="cart-item-info">
+                <div class="cart-item-title">${item.title}</div>
             </div>
+            <div class="cart-item-price">₹${item.price}</div>
+            <button class="cart-remove-btn" onclick="removeFromCart(${index})" title="Remove item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
         `;
         container.appendChild(div);
     });
@@ -383,129 +380,10 @@ function renderCart() {
 
 function proceedToPayment() {
     if (cart.length === 0) return;
-    openPaymentModal();
-}
-
-// ---- PAYMENT GATEWAY ----
-let selectedPaymentMethod = null;
-
-function openPaymentModal() {
+    
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
     closeCartModal();
-    
-    const modal = document.getElementById('payment-modal');
-    if (!modal) return;
-    
-    const container = document.getElementById('payment-items-container');
-    const userDisplay = document.getElementById('payment-username');
-    
-    if (userDisplay) userDisplay.innerText = `${username ? username : 'Guest'}'s order`;
-    
-    // Render Items
-    if (container) {
-        container.innerHTML = '';
-        let total = 0;
-        cart.forEach(item => {
-            total += item.price;
-            container.innerHTML += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="width: 40px; height: 40px; background: rgba(0,0,0,0.3); border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                            <img src="https://mc-heads.net/avatar/${username ? username : 'MHF_Chest'}/24" style="border-radius: 4px;">
-                        </div>
-                        <div style="color: white; font-weight: 700; font-size: 14px;">${item.title}</div>
-                    </div>
-                    <div style="color: var(--text-muted); font-size: 14px; font-weight: 700;">₹${item.price}</div>
-                </div>
-            `;
-        });
-        
-        // Add Total row
-        container.innerHTML += `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; margin-top: 10px;">
-                <div style="color: white; font-weight: 800; font-size: 16px;">Total</div>
-                <div style="color: #4CAF50; font-weight: 900; font-size: 20px;">₹${total}</div>
-            </div>
-        `;
-    }
-    
-    // Reset selections
-    selectPaymentMethod(null);
-    
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-function closePaymentModal() {
-    const modal = document.getElementById('payment-modal');
-    if (modal) modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function handlePaymentModalClick(event) {
-    const modal = document.getElementById('payment-modal');
-    if (event.target === modal) closePaymentModal();
-}
-
-function selectPaymentMethod(method) {
-    selectedPaymentMethod = method;
-    
-    // Reset UI
-    ['card', 'gpay', 'paypal', 'upi'].forEach(m => {
-        const el = document.getElementById(`pm-${m}`);
-        if (el) el.classList.remove('selected');
-    });
-    
-    if (method) {
-        const el = document.getElementById(`pm-${method}`);
-        if (el) el.classList.add('selected');
-    }
-    
-    // Update Dynamic Form
-    const form = document.getElementById('payment-dynamic-form');
-    if (form) {
-        if (method === 'upi') {
-            form.innerHTML = `
-                <div style="background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); padding: 20px; border-radius: 8px; text-align: center;">
-                    <div style="color: #4CAF50; font-weight: 800; font-size: 16px; margin-bottom: 8px;">UPI Selected</div>
-                    <div style="color: var(--text-muted); font-size: 14px;">Click "Complete Payment" below to generate your secure QR code for FamPay.</div>
-                </div>
-            `;
-        } else {
-            form.innerHTML = `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div>
-                        <div style="color: white; font-weight: 700; margin-bottom: 10px;">Full Name</div>
-                        <input type="text" placeholder="Enter your full name" class="payment-input">
-                    </div>
-                    <div>
-                        <div style="color: white; font-weight: 700; margin-bottom: 10px;">Zip / Postal Code</div>
-                        <input type="text" placeholder="Zip code" class="payment-input">
-                    </div>
-                </div>
-            `;
-        }
-    }
-}
-
-function executePayment() {
-    if (!selectedPaymentMethod) {
-        showToast("Please select a payment method first.");
-        return;
-    }
-    
-    if (selectedPaymentMethod === 'upi') {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        closePaymentModal();
-        openCheckout("CART CHECKOUT", `₹${total}`);
-        
-        // Inject custom instruction for Discord
-        const instructionElements = document.querySelectorAll('.modal-instruction');
-        if (instructionElements.length > 1) {
-            instructionElements[1].innerHTML = `After paying, take a screenshot of your successful transaction. Join our official Discord server and open a support ticket mentioning your username: <strong style="color:var(--color-accent)">${username}</strong> with your screenshot to instantly claim your rewards!`;
-        }
-    } else {
-        showToast("This payment method is currently unavailable. Please use UPI.");
-    }
+    openCheckout("CART CHECKOUT", `₹${total}`);
 }
 
 // ---- LOGIN MODAL ----
@@ -546,21 +424,22 @@ function submitLogin() {
     showToast(`Successfully logged in as ${username}!`);
 }
 
-// ---- PARTICLES LOGIC ----
+// ---- FLOATING PARTICLES LOGIC ----
 function initParticles() {
     const container = document.getElementById('particles-container');
     if (!container) return;
+    container.innerHTML = '';
     
-    const particleCount = 25;
+    const particleCount = 22;
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        const size = Math.random() * 15 + 5;
+        const size = Math.random() * 12 + 6;
         const posX = Math.random() * 100;
-        const delay = Math.random() * 10;
-        const duration = Math.random() * 10 + 10;
-        const opacity = Math.random() * 0.5 + 0.1;
+        const delay = Math.random() * 8;
+        const duration = Math.random() * 8 + 8;
+        const opacity = Math.random() * 0.45 + 0.15;
         
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
@@ -573,7 +452,7 @@ function initParticles() {
         
         particle.addEventListener('animationend', () => {
             particle.style.left = `${Math.random() * 100}%`;
-            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            particle.style.animationDuration = `${Math.random() * 8 + 8}s`;
             particle.style.animation = 'none';
             particle.offsetHeight; 
             particle.style.animation = null; 
